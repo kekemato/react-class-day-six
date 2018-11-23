@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react'
+import ToDo from './ToDo'
 
-const App = () => (
-  <div>
-  Hello
-  </div>
+const App = (props) => (
+  <ToDo />
 )
 
-export default App;
+export default App
