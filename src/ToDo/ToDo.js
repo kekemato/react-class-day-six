@@ -1,4 +1,5 @@
 import React from 'react'
+import AddTask from './AddTask';
 
 class ToDo extends React.Component {
     state = {
@@ -14,15 +15,15 @@ class ToDo extends React.Component {
         key: Date.now()
     })
 
-    addTask = () => {
+    addTask = () =>
         this.setState({
             tasks: this.state.tasks.concat(
                 this.createTask(
                     this.state.newTaskText
                 )
-            )
+            ),
+            newTaskText: ''
         })
-    }
 
     deleteTask = taskKey => {
         this.setState({ tasks: this.state.tasks.filter((task) => task.key !== taskKey) })
@@ -44,11 +45,20 @@ class ToDo extends React.Component {
         })
     }
 
+    onAllClickHandler = () => this.setState({ chosenFilter: 'All' })
+    onCompletedClickHandler = () => this.setState({ chosenFilter: 'Completed' })
+    onUnCompletedClickHandler = () => this.setState({ chosenFilter: 'Uncompleted' })
+
+    onFilteredTextChangeHandler = event => this.setState({ filterText: event.target.value })
+    onNewTaskTextChangeHandler = event => this.setState({ newTaskText: event.target.value })
+
     render() {
         return (
-            <div>
-                To Do:
-            </div>
+            <AddTask
+            newTaskText={this.state.newTaskText}
+            onNewTaskTextChangeHandler={this.onNewTaskTextChangeHandler}
+            addTask={this.addTask}
+            />
         )
     }
 }
