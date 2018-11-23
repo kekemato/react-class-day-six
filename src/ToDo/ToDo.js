@@ -15,7 +15,7 @@ class ToDo extends React.Component {
         }
     )
 
-    componentDidUpdate(){
+    componentDidUpdate() {
         this.saveInLocalStorage()
     }
 
@@ -76,12 +76,15 @@ class ToDo extends React.Component {
                 />
                 < Search
                     filterText={this.state.filterText}
+                    chosenFilter={this.state.chosenFilter}
                     onFilteredTextChangeHandler={this.onFilteredTextChangeHandler}
                     onAllClickHandler={this.onAllClickHandler}
                     onCompletedClickHandler={this.onCompletedClickHandler}
                     onUnCompletedClickHandler={this.onUnCompletedClickHandler}
                 />
                 <List
+                    filterText={this.state.filterText}
+                    chosenFilter={this.state.chosenFilter}
                     tasksList={this.state.tasks}
                     toggleTask={this.toggleTask}
                     deleteTask={this.deleteTask}
