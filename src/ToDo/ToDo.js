@@ -1,5 +1,7 @@
 import React from 'react'
-import AddTask from './AddTask';
+import AddTask from './AddTask'
+import List from './List'
+import Search from './Search'
 
 class ToDo extends React.Component {
     state = {
@@ -29,14 +31,14 @@ class ToDo extends React.Component {
         this.setState({ tasks: this.state.tasks.filter((task) => task.key !== taskKey) })
     }
 
-    completeTask = taskKey => {
+    toggleTask = taskKey => {
         this.setState({
             tasks: this.state.tasks.map(
                 task => (
-                    (task.key !== taskKey) ?
+                    (task.key === taskKey) ?
                         {
                             ...task,
-                            isCompleted: true
+                            isCompleted: !task.isCompleted
                         }
                         :
                         task
@@ -54,11 +56,25 @@ class ToDo extends React.Component {
 
     render() {
         return (
-            <AddTask
-            newTaskText={this.state.newTaskText}
-            onNewTaskTextChangeHandler={this.onNewTaskTextChangeHandler}
-            addTask={this.addTask}
-            />
+            <div>
+                <AddTask
+                    newTaskText={this.state.newTaskText}
+                    onNewTaskTextChangeHandler={this.onNewTaskTextChangeHandler}
+                    addTask={this.addTask}
+                />
+                < Search
+                    filterText={this.state.filterText}
+                    onFilteredTextChangeHandler={this.onFilteredTextChangeHandler}
+                    onAllClickHandler={this.onAllClickHandler}
+                    onCompletedClickHandler={this.onCompletedClickHandler}
+                    onUnCompletedClickHandler={this.onUnCompletedClickHandler}
+                />
+                <List
+                    tasksList={this.state.tasks}
+                    toggleTask={this.toggleTask}
+                    deleteTask={this.deleteTask}
+                />
+            </div>
         )
     }
 }
