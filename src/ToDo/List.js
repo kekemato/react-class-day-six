@@ -1,8 +1,9 @@
 import React from 'react'
 import Task from './Task'
+import {unifyString} from '../utils'
 
 const List = (props) => (
-    <div>
+    <React.Fragment>
         {
             props.tasksList &&
             props.tasksList.map &&
@@ -20,17 +21,11 @@ const List = (props) => (
                     }
                 })
                 .filter(task =>
-                    task.taskText
-                        .toLowerCase()
-                        .replace(/\s/g, '')
-                        .normalize('NFD')
-                        .replace(/[\u0300-\u036f]/g, "")
+                    unifyString(task.taskText)
                         .includes(
-                            props.filterText
-                                .toLowerCase()
-                                .replace(/\s/g, '')
-                                .normalize('NFD')
-                                .replace(/[\u0300-\u036f]/g, "")))
+                            unifyString(props.filterText)
+                        )
+                )
                 .map(
                     task => (
                         <Task
@@ -43,7 +38,7 @@ const List = (props) => (
                 )
         }
 
-    </div>
+    </React.Fragment>
 )
 
 export default List

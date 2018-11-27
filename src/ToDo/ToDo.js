@@ -2,6 +2,12 @@ import React from 'react'
 import AddTask from './AddTask'
 import List from './List'
 import Search from './Search'
+import Paper from 'material-ui/Paper'
+
+const style = {
+    margin: 12,
+    padding: 10
+}
 
 class ToDo extends React.Component {
     state = (
@@ -68,7 +74,8 @@ class ToDo extends React.Component {
 
     render() {
         return (
-            <div>
+            <Paper
+            style={style}>
                 <AddTask
                     newTaskText={this.state.newTaskText}
                     onNewTaskTextChangeHandler={this.onNewTaskTextChangeHandler}
@@ -89,7 +96,7 @@ class ToDo extends React.Component {
                     toggleTask={this.toggleTask}
                     deleteTask={this.deleteTask}
                 />
-            </div>
+            </Paper>
         )
     }
 }

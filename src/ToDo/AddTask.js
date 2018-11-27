@@ -1,18 +1,29 @@
 import React from 'react'
+import RaisedButton from 'material-ui/RaisedButton'
+import TextField from 'material-ui/TextField';
+
+const style = {
+    button: {
+        margin: 12
+    }
+}
 
 const AddTask = (props) => (
     <div>
-        <input
+        <TextField
+            hintText="Type task"
+            fullWidth={true}
             type="text"
             value={props.newTaskText}
             onChange={props.onNewTaskTextChangeHandler}
         />
 
-        <button
+        <RaisedButton
             onClick={props.addTask}
-        >
-            Add task
-    </button>
+            label="Add task"
+            secondary={true}
+            style={style.button}
+        />
     </div>
 )
 
